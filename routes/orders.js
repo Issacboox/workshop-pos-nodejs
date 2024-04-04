@@ -78,7 +78,7 @@ const randomReceiptNumber = () => {
         user_id: user_id,
         product_id: product_id,
         quantity: quantity,
-        total: product.price && quantity ? product.price * quantity : 0, // Calculate total only if price and quantity are valid numbers
+        total: typeof product.price === 'number' && typeof quantity === 'number' ? product.price * quantity : 0,
         receipt_number: randomReceiptNumber(),
       });
       await order.save();
