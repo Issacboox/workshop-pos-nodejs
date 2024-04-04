@@ -100,13 +100,51 @@ const randomReceiptNumber = () => {
       });
     }
   });
-  
+
+// Get orders for a specific product
+router.get("/product-orders/:product_id", async function (req, res, next) {
+  try {
+      const { product_id } = req.params;
+      const orders = await ordersSchema.find({ product_id: product_id });
+
+      return res.status(200).send({
+          data: orders,
+          message: "success",
+          success: true,
+      });
+  } catch (error) {
+      console.error(error);
+      return res.status(500).send({
+          message: "Error getting product orders",
+          success: false,
+      });
+  }
+});
 
 
-// check order for each product ex => banana product have 10 order 
+// Get order by ID
+router.get("/:id", async function (req, res, next) {
+  try {
+      const order = await ordersSchema.findById(req.params.id);
+      if (!order) {
+          return res.status(404).send({
+              message: "Order not found",
+              success: false,
+          });
+      }
+      return res.status(200).send({
+          data: order,
+          message: "success",
+          success: true,
+      });
+  } catch (error) {
+      console.error(error);
+      return res.status(500).send({
+          message: "Error getting order",
+          success: false,
+      });
+  }
+});
 
-
-
-// 
 
 module.exports = router;
