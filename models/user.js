@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const userRoles = ['ADMIN', 'USER'];
 const userStatus = ['Waiting For Approve', 'APPROVED'];
 
-
 const usersSchema = new mongoose.Schema({
     username: { type: String, unique: true },
     password: { type: String },
