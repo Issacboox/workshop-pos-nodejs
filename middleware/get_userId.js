@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 function getUserId(req, res, next) {
     const token = req.headers.authorization?.split(' ')[1]; // Assuming token is sent in the Authorization header
     if (!token) {
-      return res.status(401).json({ message: 'Missing JWT token' });
+      return res.status(401).json({ message: 'Please Login' });
     }
   
     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
